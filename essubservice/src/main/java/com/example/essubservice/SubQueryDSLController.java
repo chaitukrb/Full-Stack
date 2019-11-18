@@ -2,7 +2,6 @@ package com.example.essubservice;
 
 import com.example.essubservice.model.News;
 import com.example.essubservice.model.Subscription;
-//import com.example.essubservice.repository.NewsRepo;
 import com.example.essubservice.repository.NewsRepo;
 import com.example.essubservice.repository.SubRepo;
 import com.example.essubservice.service.SubQueryDSLService;
@@ -26,7 +25,7 @@ public class SubQueryDSLController {
     @Autowired
     private NewsRepo newsRepo;
     @Autowired
-    private  KafkaTemplate kafkaTemplate;
+    private  KafkaTemplate<String, News> kafkaTemplate;
 
     private static final String TOPIC = "kafka_news";
 
@@ -70,7 +69,10 @@ public class SubQueryDSLController {
     @PostMapping("/news")
     public int saveNews(@RequestBody List<News> news) {
         newsRepo.saveAll(news);
-        kafkaTemplate.send(TOPIC, news);
+        //kafkaTemplate.send(TOPIC, news);
+        for(int i=0;i<news.size();i++) {
+            kafkaTemplate.send(TOPIC, news.get(i));
+        }
         return news.size();
     }
 
