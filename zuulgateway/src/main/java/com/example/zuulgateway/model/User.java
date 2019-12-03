@@ -75,14 +75,6 @@ public class User implements Serializable {
         this.email = email;
     }
 
-//    public Set<Subscription> getSubscriptions() {
-//        return subscriptions;
-//    }
-//
-//    public void setSubscriptions(Set<Subscription> subscriptions) {
-//        this.subscriptions = subscriptions;
-//    }
-
     public Set<Role> getRoles() {
         return roles;
     }
