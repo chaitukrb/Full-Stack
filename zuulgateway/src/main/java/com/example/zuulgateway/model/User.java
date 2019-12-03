@@ -22,17 +22,6 @@ public class User implements Serializable {
 
     private String email;
 
-
-//    @ManyToMany(fetch = FetchType.LAZY,
-//        cascade = {
-//                CascadeType.PERSIST,
-//                CascadeType.MERGE
-//        })
-//    @JoinTable(name = "user_subscriptions",
-//    joinColumns = { @JoinColumn(name = "user_id")},
-//    inverseJoinColumns = { @JoinColumn(name = "subscription_id")})
-//    private Set<Subscription> subscriptions = new HashSet<>();
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
